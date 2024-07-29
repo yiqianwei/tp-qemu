@@ -28,6 +28,8 @@ def run(test, params, env):
     host_mem_size = int(process.getoutput(host_mem_size_cmd).strip())
     vm_mem_size = host_mem_size // int(params.get("max_vms"))
 
+    if vm_cpu_num % 2 == 1:
+        params["vcpu_sockets"] = 1
     params["smp"] = params["vcpu_maxcpus"] = vm_cpu_num
     params["mem"] = vm_mem_size
 
